@@ -151,7 +151,7 @@ Anfragen.
 ### 4. Persistenz
 
 _Round-Robin_ ist nicht besonders nützlich, wenn ein Client über mehrere 
-Requests hinweg mit dem selber Server kommunizieren soll. Informieren Sie 
+Requests hinweg mit demselben Server kommunizieren soll. Informieren Sie 
 sich in der [NGINX-Dokumentation](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/#choosing-a-load-balancing-method)
 über die unterstützten Loadbalancing-Methoden und konfigurieren Sie 
 NGINX dann mit der _IP-Hash_-Methode. Ändern Sie dazu die 'nginx.conf'-Datei.
@@ -162,9 +162,10 @@ Docker Compose macht es Ihnen einfach, diese Änderung zu deployen:
 Dieser Befehl builded beide Docker-Images neu (nur die geänderten Teile), 
 stoppt die laufenden Services und startet sie mit den neuen Images wieder. 
 Jetzt sollten Ihre Anfragen immer auf dem selben Server landen.
-IntelliJ hat übrigens ein grafisches Interface, um solche Docker- oder 
-Docker-Compose-Befehle auszuführen; Sie finden es im Tab 'Services' in der 
-unteren Leiste.
+
+Die Docker-Unterstützung von IntelliJ beinhaltet übrigens ein grafisches 
+Interface, um solche Docker- oder Docker-Compose-Befehle auszuführen; Sie finden
+es im Tab 'Services' in der unteren Leiste.
 
 
 ### 5. Fehlertoleranz
@@ -182,7 +183,9 @@ dass ein Server bereits nach 3 Sekunden als nicht verfügbar markiert wird.
 Starten Sie die Applikation neu und überprüfen Sie, dass die Fehlertoleranz 
 funktioniert, indem Sie abwechslungsweise einen der Web-Server stoppen und 
 die Seite im Browser wiederholt neu laden. 
-Verwenden Sie folgende Kommandozeilen-Befehle oder das Interface von IntelliJ:
+Verwenden Sie folgende Kommandozeilen-Befehle oder das Interface von 
+IntelliJ um laufende Container aufzulisten und einzelne davon zu stoppen 
+oder wieder zu starten:
 
     docker ps
     docker stop apm-app_web-app_1
