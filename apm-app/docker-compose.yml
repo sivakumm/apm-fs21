@@ -14,3 +14,10 @@ services:
       - 8080:8080
     cap_add:
       - NET_ADMIN
+  load-balancer-backup:
+    build:
+      context: load-balancer
+      args:
+        role: backup
+    cap_add:
+      - NET_ADMIN
