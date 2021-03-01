@@ -93,22 +93,34 @@ Sie das Dockerfile nochmals um folgende Zeilen:
     COPY keepalived-master.conf /etc/keepalived/keepalived.conf
     RUN chmod -x /etc/keepalived/keepalived.conf
 
-Als letztes müssen wir dem Docker-Container noch zusätzliche Rechte geben, 
-welche von VRRP vorausgesetzt werden. Dafür ändern Sie die 'docker-compose.
-yml'-Datei ab und fügen beim 'load-balancer'-Service folgende Zeilen hinzu:
+Als letztes müssen Sie noch zwei Änderungen im 'docker-compose.yml'-File 
+vornehmen. Erstens brauchen die Loadbalancer-Container zusätzliche Rechte,
+welche von VRRP vorausgesetzt werden. Dafür fügen beim 'load-balancer'-Service
+folgende Zeilen hinzu:
 
     cap_add:
       - NET_ADMIN
 
-Die Zeile `cap_add` muss gleich tief eingerückt sein wie `ports`.
+Die Zeile `cap_add` muss gleich tief eingerückt sein wie `ports`. Zusätzlich 
+muss das Docker-interne Netzwerk konfiguriert werden (Docker Compose 
+konfiguriert das Netzwerk sonst unter Umständen mit einer Subnetzmaske, 
+welche nicht mit der virtuellen IP kompatibel ist). Fügen Sie am Ende der 
+Datei folgende Zeilen hinzu:
+
+    networks:
+      default:
+        ipam:
+          config:
+            - subnet: 172.19.0.0/16
+              gateway: 172.19.0.1
 
 Starten Sie (via Docker Compose) nochmals die Container und führen Sie im 
 Loadbalancer-Container `keepalived -nl &` aus. (Das `&` führt dazu, dass das 
 Programm im Hintergrund ausgeführt wird und Sie weitere Befehle ausführen 
 können, ohne keepalived zu beenden.) Jetzt sollte der Dienst funktionieren und
 am Schluss 'Entering MASTER STATE' ausgeben. Mit dem Befehl `ip add show` 
-können Sie (innerhalb des Containers) überprüfen, dass die virtuelle IP `172.19.
-1.1` aufgesetzt wurde. Leider können Sie von ausserhalb von Docker 
+können Sie (innerhalb des Containers) überprüfen, dass die virtuelle IP 
+172.19.1.1 aufgesetzt wurde. Leider können Sie von ausserhalb von Docker 
 normalerweise nicht auf diese zugreifen (dazu später noch mehr).
 
 
