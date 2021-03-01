@@ -9,3 +9,5 @@ services:
     build: load-balancer
     ports:
       - 8080:8080
+    cap_add:
+      - NET_ADMIN
