@@ -5,7 +5,21 @@ services:
     build: .
     deploy:
       replicas: 2
-  load-balancer:
-    build: load-balancer
+  reverse-proxy:
+    build: reverse-proxy
     ports:
       - 8080:8080
+  load-balancer-master:
+    build:
+      context: load-balancer
+      args:
+        role: master
+    cap_add:
+      - NET_ADMIN
+  load-balancer-backup:
+    build:
+      context: load-balancer
+      args:
+        role: backup
+    cap_add:
+      - NET_ADMIN
