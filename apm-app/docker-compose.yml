@@ -6,7 +6,7 @@ services:
     deploy:
       replicas: 2
   reverse-proxy:
-    build: reverse-proxy
+    build: entry
     ports:
       - 8080:8080
   load-balancer-master:
