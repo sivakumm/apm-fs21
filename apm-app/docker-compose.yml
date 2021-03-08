@@ -5,7 +5,7 @@ services:
     build: .
     deploy:
       replicas: 2
-  reverse-proxy:
+  entry:
     build: entry
     ports:
       - 8080:8080
