@@ -23,3 +23,10 @@ services:
         role: backup
     cap_add:
       - NET_ADMIN
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
+          gateway: 172.19.0.1
