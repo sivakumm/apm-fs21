@@ -1,4 +1,4 @@
-# APM Woche 4: Performance messen
+# APM Woche 4: Auswerten von Messungen
 
 
 [Vorlesungsfolien](Auswerten%20von%20Messungen.pdf)
