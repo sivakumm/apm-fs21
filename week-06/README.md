@@ -47,12 +47,12 @@ Sie sollten eine Ausgabe ähnlich wie diese erhalten:
     NAME             STATUS   ROLES    AGE    VERSION
     docker-desktop   Ready    master   30s    v1.19.7
 
-Für kompliziertere Befehle können Sie auch die Kubernetes-Integration von 
-IntelliJ verwenden. Gehen Sie dafür in den Einstellungen auf "Plugins", 
-wechseln Sie oben auf "Marketplace" und suchen Sie nach "Kubernetes". 
-Installieren Sie das Plugin von JetBrains und starten Sie IntelliJ neu. 
-Jetzt sollten Sie im "Services"-Tab unten einen Eintrag für "docker-desktop" 
-sehen.
+Statt `kubectl` können Sie für die meisten Dinge auch die 
+Kubernetes-Integration von IntelliJ verwenden. Gehen Sie dafür in den
+Einstellungen auf "Plugins", wechseln Sie oben auf "Marketplace" und suchen Sie
+nach "Kubernetes". Installieren Sie das Plugin von JetBrains und starten Sie
+IntelliJ neu. Jetzt sollten Sie im "Services"-Tab unten einen Eintrag für
+"docker-desktop" sehen.
 
 
 ### 2. App auf Kubernetes deployen
@@ -137,20 +137,19 @@ nächster Schritt).
     kubectl delete deployment apm-app
     kubectl delete -f apm-app.yaml
 
-Statt mittels dieser `kubectl`-Befehlen kann ein Grossteil der
-Kubernetes-Interaktion übrigens auch über das IntelliJ-Kubernetes-Plugin 
-erfolgen. Pods, Deployments und viele weitere Dinge sind im "Services"-Tab 
-sichtbar. (Allerdings müssen Sie diese ab und zu refreshen.)
+Zur Erinnerung: Falls Sie das IntelliJ-Plugin verwenden, finden Sie Pods, 
+Deployments und viele weitere Dinge im "Services"-Tab. (Allerdings müssen Sie
+diese ab und zu refreshen.)
 
 
 ### 3. App öffentlich zugänglich machen
 
-Mit der bisherigen Konfiguration ist die App bereits im internen 
-Kubernetes-Netzwerk erreichbar (sonst hätten sich die beiden 
+Mit der bisherigen Konfiguration sind die beiden App-Server bereits im 
+internen Kubernetes-Netzwerk erreichbar (sonst hätten sich die beiden 
 Hazelcast-Instanzen nicht gefunden), aber von aussen ist noch kein Zugriff 
-möglich. Um diesen zu ermöglichen, braucht es ein weiteres Kubernetes-Objekt 
-vom Typ "Service". Ein Service nimmt externe Anfragen an einen bestimmten Port 
-entgegen und leitet sie an eine bestimmte Menge von Pods weiter.
+möglich. Dafür braucht es ein weiteres Kubernetes-Objekt vom Typ "Service".
+Ein Service nimmt externe Anfragen an einen bestimmten Host-Port entgegen und 
+leitet sie an einen bestimmten Pod weiter.
 
 Erweitern Sie die YAML-Datei indem Sie folgenden Text hinzufügen:
 
@@ -167,7 +166,7 @@ Erweitern Sie die YAML-Datei indem Sie folgenden Text hinzufügen:
         - port: 8080
 
 Beachten Sie die drei Striche `---`; diese trennen mehrere Kubernetes-Objekte
-innerhalb einer Datei voneinander. Diese Konfiguration erstellten einen 
+innerhalb einer Datei voneinander. Diese Konfiguration erstellt einen 
 Service vom Typ 'LoadBalancer', welcher die Anfragen in einer 
 Round-Robin-Manier an jene Pods weiterleitet, welche durch den `selector` 
 definiert sind. In diesem Fall sind das alle Pods mit dem Label `app: apm-app`,
