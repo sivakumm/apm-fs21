@@ -120,7 +120,7 @@ ersetzen den Pod-Namen mit einem vorher angezeigten:
     kubectl logs apm-app-cdd866ddf-cdstf
 
 Sie sollten die bekannte Ausgabe von Spring Boot sehen. Die beiden Instanzen 
-sollten sich auch gegenseitig gefunden und dem gleichen Hazelcast-Cluster 
+sollten sich auch gegenseitig gefunden haben und dem gleichen Hazelcast-Cluster 
 beigetreten sein (siehe [Übung 3](../week-03)). Die App-Instanzen laufen in 
 normalen Docker-Containern, welche mit dem bekannten Docker-Befehl angezeigt 
 werden können:
@@ -177,3 +177,25 @@ erreichen. Beachten Sie den angezeigten Hostnamen. Wenn Sie die Seite
 wiederholt neu laden, sollten Sie irgendwann auch mal auf dem zweiten Server 
 landen. Halten Sie die Reload-Taste (z. B. F5) gedrückt, um das Ganze zu 
 beschleunigen.
+
+
+### 4. Autoscaling
+
+Zum Schluss sollen Sie die App automatisch skalieren lassen, d. h. bei Bedarf 
+automatisch zusätzliche Pods starten und in den Cluster integrieren. Dafür 
+brauchen Sie ein weiteres Kubernetes-Objekt, vom Typ 'HorizontalPodAutoscaler'.
+Dieser Autoscaler holt sich regelmässig Performance-Metriken der laufenden 
+Pods und entscheidet aufgrund einer konfigurierten Policy, ob zusätzliche 
+Pods nötig sind oder ob Pods entfernt werden können. Die Details zum 
+Algorithmus finden Sie in der
+[Dokumentation](https://kubernetes.io/de/docs/tasks/run-application/horizontal-pod-autoscale/#details-zum-algorithmus).
+
+Die Performance-Metriken werden in Kubernetes von einem "Metrics Server" zur 
+Verfügung gestellt. In gewissen Kubernetes-Umgebungen ist dieser Server 
+bereits vorkonfiguriert, aber in Docker Desktop fehlt er. Ausserdem ist eine 
+kleine Anpassung in der Konfiguration nötig. Eine funktionierende Konfiguration
+befindet sich in der Datei [metrics-server.yaml](metrics-server.yaml). Falls 
+Sie diese schon gepullt haben, können Sie sie mit folgendem Befehl deployen:
+
+    kubectl apply -f metrics-server.yaml
+
