@@ -1,5 +1,6 @@
 package ch.fhnw.apm.app;
 
+import ch.fhnw.apm.app.storage.ClusterStorage;
 import ch.fhnw.apm.app.storage.LocalStorage;
 import ch.fhnw.apm.app.storage.Storage;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +16,6 @@ public class ApmApp {
 
     @Bean
     Storage storage() {
-        return new LocalStorage();
+        return new ClusterStorage("clusterMap");
     }
 }
