@@ -3,6 +3,8 @@
 
 [Vorlesungsfolien](w09_gc_tuning.pdf)
 
+[Notizen](w09_gc_tuning_notes_scan.pdf)
+
 ## Übungen
 
 ### Übung 1: Selbstudium GC-Implementierungen Java HotSpot
