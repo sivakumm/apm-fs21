@@ -1,4 +1,4 @@
-# APM Woche 8: Garbage Collection Algorithmen
+# APM Woche 9: Garbage Collection Tuning
 
 
 [Vorlesungsfolien](w09_gc_tuning.pdf)
