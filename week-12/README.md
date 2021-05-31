@@ -5,7 +5,7 @@
 
 ## Übung
 
-In diesem Ordner Sie eine Datei `CopyAlgorithms.zip`. Sie enthält einige Beispielprogramme die Ihnen die Funktionsweise der nio-Klassen verdeutlichen helfen. Darunter sind auch die im Skript erwähnten `CopyFile` Programm.
+Der Ordner `code` enthält einige Beispielprogramme die Ihnen die Funktionsweise der nio-Klassen verdeutlichen helfen. Darunter sind auch die im Skript erwähnten `CopyFile.java` Programm.
 
 Versuchen Sie mit Hilfe von der Java API Dokumentation (Package java.nio und Subpackages) folgende Fragen zu beantworten:
 
