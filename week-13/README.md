@@ -5,14 +5,14 @@
 
 ## Übung
 
-###Problemstellung
+### Problemstellung
 
 Der Ordner `code` enthält ein Beispielprogramm `CL`. Dieses versucht eine Klasse `Singleton` zweimal zu laden.
 
 Bringen Sie den Code zum Laufen. Bringen Sie den Code zum Laufen. Die Meldung `Singleton instance initialized` soll zwei Mal auf
 der Konsole erscheinen. Passiert was Sie erwarten, nämlich dass die Klasse zwei Mal geladen wird? Warum (nicht)?
 
-###Lösung
+### Lösung
 
 Die Klasse wird nur geladen, aber nicht initialisiert. Dies passiert erst, wenn auch tatsächlich Code der Klasse zur Ausführung gebracht wird. Daher ist es nötig, nach dem Befehl die Klasse zu laden...
 
