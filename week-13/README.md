@@ -3,6 +3,10 @@
 
 [Vorlesungsfolien](w13_classloading.pdf)
 
+[Skript](script_classloader.pdf)
+
+[Skript mit Notizen](script_classloader_with_notes.pdf)
+
 ## Übung
 
 ### Problemstellung
